@@ -109,7 +109,6 @@
         </div>
 
         <div class="nav-buttons">
-            <button class="nav-button" onclick="loadPreviousChapter()">Pasal Sebelumnya</button>
             <button class="nav-button" onclick="loadNextChapter()">Pasal Berikutnya</button>
         </div>
 
@@ -178,13 +177,6 @@
                 verseElement.innerHTML = `<span class="verse-number">${index + 1}</span>${verse}`;
                 readingContainer.appendChild(verseElement);
             });
-        }
-
-        function loadPreviousChapter() {
-            if (currentChapter > 1) {
-                currentChapter--;
-                loadChapter(currentBook, currentChapter);
-            }
         }
 
         function loadNextChapter() {
