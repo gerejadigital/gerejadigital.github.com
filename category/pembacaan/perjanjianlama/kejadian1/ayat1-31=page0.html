@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gereja Digital - Alkitab</title>
+    <title>Gereja Digital - Pembacaan Alkitab Digital</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
@@ -162,14 +162,13 @@
 
         let currentBook = 'Kejadian';
         let currentChapter = 1;
-        let currentParagraph = 1-31;
 
         function loadChapter(book, chapter) {
             const verses = bibleData[book][chapter];
             const readingContainer = document.getElementById('readingContainer');
             const chapterTitle = document.getElementById('chapterTitle');
 
-            chapterTitle.textContent = `${book} ${chapter}`;
+            chapterTitle.textContent = `${book} ${chapter}:1-31`;
             readingContainer.innerHTML = '';
 
             verses.forEach((verse, index) => {
