@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembacaan Alkitab Digital</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        :root {
+            --primary: #2c3e50;
+            --secondary: #34495e;
+            --accent: #3498db;
+            --bg-light: #f5f6fa;
+            --text-color: #2d3436;
+        }
+
+        body {
+            background: var(--bg-light);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: var(--primary);
+            color: white;
+            border-radius: 10px;
+        }
+
+        .verse {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        .verse-number {
+            font-weight: bold;
+            color: var(--accent);
+            margin-right: 5px;
+        }
+
+        .reading-container {
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .nav-link {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: var(--secondary);
+        }
+
+        .chapter-navigation {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            background: var(--bg-light);
+            border-radius: 8px;
+        }
+
+        .chapter-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Pembacaan Alkitab Digital</h1>
+        </div>
+
+        <div class="nav-buttons">
+            <a class="nav-link" id="prevButton" href="/category/pembacaan/perjanjianlama/kejadian1/ayat1-31=page0">Pasal Sebelumnya</a>
+            <a class="nav-link" id="nextButton" href="/category/pembacaan/perjanjianlama/kejadian3/ayat1-31=page2">Pasal Berikutnya</a>
+        </div>
+
+        <div class="chapter-navigation">
+            <h2 id="chapterTitle" class="chapter-title">Kejadian 2:1-25</h2>
+        </div>
+
+        <div id="readingContainer" class="reading-container">
+            <!-- Ayat-ayat akan dimuat di sini -->
+        </div>
+    </div>
+
+    <script>
+        const bibleData = {
+            'Kejadian': {
+                2: [
+                    "Demikianlah diselesaikan langit dan bumi dan segala isinya.",
+                    "Ketika Allah pada hari ketujuh telah menyelesaikan pekerjaan yang dibuat-Nya itu, berhentilah Ia pada hari ketujuh dari segala pekerjaan yang telah dibuat-Nya itu.",
+                    "Lalu Allah memberkati hari ketujuh itu dan menguduskannya, karena pada hari itulah Ia berhenti dari segala pekerjaan penciptaan yang telah dibuat-Nya itu.",
+                    "Demikianlah riwayat langit dan bumi pada waktu diciptakan. Ketika Tuhan Allah menjadikan bumi dan langit,",
+                    "belum ada semak apapun di bumi, belum timbul tumbuh-tumbuhan apapun di padang, sebab Tuhan Allah belum menurunkan hujan ke bumi, dan belum ada orang untuk mengusahakan tanah itu;",
+                    "tetapi ada kabut naik ke atas dari bumi dan membasahi seluruh permukaan bumi itu--",
+                    "ketika itulah Tuhan Allah membentuk manusia itu dari debu tanah dan menghembuskan nafas hidup ke dalam hidungnya; demikianlah manusia itu menjadi makhluk yang hidup.",
+                    "Selanjutnya Tuhan Allah membuat taman di Eden, di sebelah timur; disitulah ditempatkan-Nya manusia yang dibentuk-Nya itu.",
+                    "Lalu Tuhan Allah menumbuhkan berbagai-bagai pohon dari bumi, yang menarik dan yang baik untuk dimakan buahnya; dan pohon kehidupan di tengah-tengah taman itu, serta pohon pengetahuan tentang yang baik dan yang jahat.",
+                    "Ada suatu sungai mengalir dari Eden untuk membasahi taman itu, dan dari situ sungai itu terbagi menjadi empat cabang.",
+                    "Yang pertama, namanya Pison, yakni yang mengalir mengelilingi seluruh tanah Hawila, tempat emas ada.",
+                    "Dan emas dari negeri itu baik; di sana ada damar bedolah dan batu krisopras.",
+                    "Nama sungai yang kedua ialah Gihon, yakni yang mengalir mengelilingi seluruh tanah Kush.",
+                    "Nama sungai yang ketiga ialah Tigris, yakni yang mengalir di sebelah timur Asyur. Dan sungai yang keempat ialah Efrat.",
+                    "Tuhan Allah mengambil manusia itu dan menempatkannya dalam taman Eden untuk mengusahakan dan memelihara taman itu.",
+                    "Lalu Tuhan Allah memberi perintah ini kepada manusia: \"Semua pohon dalam taman ini boleh kaumakan buahnya dengan bebas,
+                    "tetapi pohon pengetahuan tentang yang baik dan yang jahat itu, janganlah kaumakan buahnya, sebab pada hari engkau memakannya, pastilah engkau mati.\"",
+                    "Tuhan Allah berfirman: \"Tidak baik, kalau manusia itu seorang diri saja. Aku akan menjadikan penolong baginya, yang sepadan dengan dia.\"",
+                    "Lalu Tuhan Allah membentuk dari tanah segala binatang hutan dan segala burung di udara, dan dibawa-Nyalah semuanya kepada manusia itu untuk melihat, bagaimana ia menamainya; dan seperti nama yang diberikan manusia itu kepada tiap-tiap makhluk yang hidup, demikianlah nanti nama makhluk itu.",
+                    "Manusia itu memberi nama kepada segala ternak, kepada burung-burung di udara dan kepada segala binatang hutan, tetapi baginya sendiri ia tidak menjumpai penolong yang sepadan dengan dia.",
+                    "Lalu Tuhan Allah membuat manusia itu tidur nyenyak; ketika ia tidur, Tuhan Allah mengambil salah satu rusuk dari padanya, lalu menutup tempat itu dengan daging.",
+                    "Dan dari rusuk yang diambil Tuhan Allah dari manusia itu, dibangun-Nyalah seorang perempuan, lalu dibawa-Nya kepada manusia itu.",
+                    "Lalu berkatalah manusia itu: \"Inilah dia, tulang dari tulangku dan daging dari dagingku. Ia akan dinamai perempuan, sebab ia diambil dari laki-laki.\"",
+                    "Sebab itu seorang laki-laki akan meninggalkan ayahnya dan ibunya dan bersatu dengan isterinya, sehingga keduanya menjadi satu daging.",
+                    "Mereka keduanya telanjang, manusia dan isterinya itu, tetapi mereka tidak merasa malu."
+                ]
+            }
+        };
+
+        let currentBook = 'Kejadian';
+        let currentChapter = 1;
+
+        function loadChapter(book, chapter) {
+            const verses = bibleData[book][chapter];
+            const readingContainer = document.getElementById('readingContainer');
+            const chapterTitle = document.getElementById('chapterTitle');
+
+            chapterTitle.textContent = `${book} ${chapter}:1-${verses.length}`;
+            readingContainer.innerHTML = '';
+
+            verses.forEach((verse, index) => {
+                const verseElement = document.createElement('div');
+                verseElement.className = 'verse';
+                verseElement.innerHTML = `<span class="verse-number">${index + 1}</span>${verse}`;
+                readingContainer.appendChild(verseElement);
+            });
+        }
+
+        // Initialize
+        loadChapter(currentBook, currentChapter);
+    </script>
+</body>
+</html>
