@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembacaan Alkitab Digital</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        :root {
+            --primary: #2c3e50;
+            --secondary: #34495e;
+            --accent: #3498db;
+            --bg-light: #f5f6fa;
+            --text-color: #2d3436;
+        }
+
+        body {
+            background: var(--bg-light);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: var(--primary);
+            color: white;
+            border-radius: 10px;
+        }
+
+        .verse {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        .verse-number {
+            font-weight: bold;
+            color: var(--accent);
+            margin-right: 5px;
+        }
+
+        .reading-container {
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .nav-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            background: var(--primary);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-button:hover {
+            background: var(--secondary);
+        }
+
+        .chapter-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            background: var(--bg-light);
+            border-radius: 8px;
+        }
+
+        .chapter-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Pembacaan Alkitab Digital</h1>
+        </div>
+
+        <div class="nav-buttons">
+            <button class="nav-button" onclick="loadPreviousChapter()">Pasal Sebelumnya</button>
+            <button class="nav-button" onclick="loadNextChapter()">Pasal Berikutnya</button>
+        </div>
+
+        <div class="chapter-navigation">
+            <h2 id="chapterTitle" class="chapter-title">Kejadian 1</h2>
+        </div>
+
+        <div id="readingContainer" class="reading-container">
+            <!-- Ayat-ayat akan dimuat di sini -->
+        </div>
+    </div>
+
+    <script>
+        const bibleData = {
+            'Kejadian': {
+                1: [
+                    "Pada mulanya Allah menciptakan langit dan bumi.",
+                    "Bumi belum berbentuk dan kosong; gelap gulita menutupi samudera raya, dan Roh Allah melayang-layang di atas permukaan air.",
+                    "Berfirmanlah Allah: \"Jadilah terang.\" Lalu terang itu jadi."
+                ],
+                2: [
+                    "Demikianlah diselesaikan langit dan bumi dan segala isinya.",
+                    "Pada hari ketujuh Allah menyelesaikan pekerjaan yang telah dibuat-Nya itu, lalu Ia berhenti pada hari ketujuh dari segala pekerjaan yang telah dibuat-Nya.",
+                    "Allah memberkati hari ketujuh itu dan menguduskannya, karena pada hari itulah Ia berhenti dari segala pekerjaan penciptaan yang telah dibuat-Nya."
+                ]
+            }
+        };
+
+        let currentBook = 'Kejadian';
+        let currentChapter = 1;
+
+        function loadChapter(book, chapter) {
+            const verses = bibleData[book][chapter];
+            const readingContainer = document.getElementById('readingContainer');
+            const chapterTitle = document.getElementById('chapterTitle');
+
+            chapterTitle.textContent = `${book} ${chapter}`;
+            readingContainer.innerHTML = '';
+
+            verses.forEach((verse, index) => {
+                const verseElement = document.createElement('div');
+                verseElement.className = 'verse';
+                verseElement.innerHTML = `<span class="verse-number">${index + 1}</span>${verse}`;
+                readingContainer.appendChild(verseElement);
+            });
+        }
+
+        function loadPreviousChapter() {
+            if (currentChapter > 1) {
+                currentChapter--;
+                loadChapter(currentBook, currentChapter);
+            }
+        }
+
+        function loadNextChapter() {
+            if (bibleData[currentBook][currentChapter + 1]) {
+                currentChapter++;
+                loadChapter(currentBook, currentChapter);
+            }
+        }
+
+        // Initialize
+        loadChapter(currentBook, currentChapter);
+    </script>
+</body>
+</html>
