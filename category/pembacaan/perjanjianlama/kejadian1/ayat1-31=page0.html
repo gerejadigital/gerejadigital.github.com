@@ -66,27 +66,29 @@
 
         .nav-buttons {
             display: flex;
-            gap: 10px;
+            justify-content: flex-end;
             margin-bottom: 20px;
         }
 
-        .nav-button {
+        .nav-link {
             padding: 10px 20px;
             border: none;
             border-radius: 8px;
             background: var(--primary);
             color: white;
+            text-decoration: none;
+            text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
-        .nav-button:hover {
+        .nav-link:hover {
             background: var(--secondary);
         }
 
         .chapter-navigation {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
             margin-bottom: 20px;
             padding: 10px;
@@ -109,7 +111,7 @@
         </div>
 
         <div class="nav-buttons">
-            <button class="nav-button" onclick="loadNextChapter()">Pasal Berikutnya</button>
+            <a class="nav-link" id="nextButton" href="/category/pembacaan/perjanjianlama/kejadian2/ayat1-25=page1">Pasal Berikutnya</a>
         </div>
 
         <div class="chapter-navigation">
@@ -177,13 +179,6 @@
                 verseElement.innerHTML = `<span class="verse-number">${index + 1}</span>${verse}`;
                 readingContainer.appendChild(verseElement);
             });
-        }
-
-        function loadNextChapter() {
-            if (bibleData[currentBook][currentChapter + 1]) {
-                currentChapter++;
-                loadChapter(currentBook, currentChapter);
-            }
         }
 
         // Initialize
